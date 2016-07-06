@@ -6,6 +6,17 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+     'modules' => [
+        'student' => [
+            'class' => 'app\modules\student\Student',
+        ],
+        'course' => [
+            'class' => 'app\modules\course\Course',
+        ],
+        'employee' => [
+            'class' => 'app\modules\employee\Employee',
+        ],
+    ],
     'components' => [
         'view' => [
          'theme' => [
