@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Users;
 
 class SiteController extends Controller
 {
@@ -49,8 +50,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-//        if(Yii::$app->user->isGuest){
-//            return $this->redirect('?r=site/login');
+//        if(\Yii::$app->user->isGuest){
+//            return $this->redirect(['site/login']);
 //        }
 //        else{
             return $this->render('index');
@@ -60,12 +61,21 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
+        
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
+        
+        $users=new Users();
+        
         $model = new LoginForm();
+        
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            
+//            $find_user=$users->findByUsername($model->username);
+//                echo $find_user->user_type;
+//                die();
+            
             return $this->goBack();
         }
         return $this->render('login', [
@@ -77,7 +87,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-//        return $this->redirect('?r=site/login');
+//        return $this->redirect(['site/login']);
         return $this->goHome();
     }
 
