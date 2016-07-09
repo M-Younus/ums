@@ -14,6 +14,7 @@ class SiteController extends Controller
 {
     public function behaviors()
     {
+    	Yii::$app->params['userName']=Users::findIdentity(Yii::$app->user->id);
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -55,7 +56,6 @@ class SiteController extends Controller
 //        }
 //        else{
 
-    		Yii::$app->params['userName']=Users::findIdentity(Yii::$app->user->id);
             return $this->render('index');
 //        }
         

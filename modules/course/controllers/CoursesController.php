@@ -8,6 +8,7 @@ use app\modules\course\models\CoursesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Users;
 
 /**
  * CoursesController implements the CRUD actions for Courses model.
@@ -19,6 +20,7 @@ class CoursesController extends Controller
      */
     public function behaviors()
     {
+    	Yii::$app->params['userName']=Users::findIdentity(Yii::$app->user->id);
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),

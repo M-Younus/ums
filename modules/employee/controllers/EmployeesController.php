@@ -22,6 +22,7 @@ class EmployeesController extends Controller
 		
     public function behaviors()
     {
+    	Yii::$app->params['userName']=Users::findIdentity(Yii::$app->user->id);
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
