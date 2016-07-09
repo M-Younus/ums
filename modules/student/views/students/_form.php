@@ -23,6 +23,7 @@ use app\modules\course\models\Courses;
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'c_id')->dropDownList(
+    		ArrayHelper::map(Courses::find()->all(),'id' ,'name' ),['prompt'=>'Select Course']		
     )?>
 
     <div class="form-group">
