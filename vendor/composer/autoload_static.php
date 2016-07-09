@@ -29,6 +29,7 @@ class ComposerStaticInit0fb7274d6961f08116ce84af67e50509
         ),
         'd' => 
         array (
+            'dosamigos\\multiselect\\' => 22,
             'dmstr\\' => 6,
         ),
         'c' => 
@@ -77,6 +78,10 @@ class ComposerStaticInit0fb7274d6961f08116ce84af67e50509
         'rmrevin\\yii\\fontawesome\\' => 
         array (
             0 => __DIR__ . '/..' . '/rmrevin/yii2-fontawesome',
+        ),
+        'dosamigos\\multiselect\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-multi-select-widget',
         ),
         'dmstr\\' => 
         array (

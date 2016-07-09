@@ -8,6 +8,7 @@ use app\modules\student\models\StudentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Users;
 
 /**
  * StudentsController implements the CRUD actions for Students model.
@@ -66,6 +67,16 @@ class StudentsController extends Controller
         $model = new Students();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        	
+        	//save student info in users table
+        	
+        	$user=new Users();
+        	$user->user_id=$model->id;
+        	$user->user_type="student";
+        	$user->username=$model->user_name;
+        	$user->password=$model->user_name;
+        	$user->save();
+        	
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

@@ -48,11 +48,11 @@ class Students extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'full_name' => 'Full Name',
-            'user_name' => 'User Name',
-            'email' => 'Email',
+//             'full_name' => 'Full Name',
+//             'user_name' => 'User Name',
+            'email' => 'Full Name',
             'phone' => 'Phone',
-            'c_id' => 'C ID',
+            'c_id' => 'Course',
         ];
     }
 

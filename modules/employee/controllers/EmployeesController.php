@@ -8,6 +8,8 @@ use app\modules\employee\models\EmployeesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Users;
+use app\models\courEmp;
 
 /**
  * EmployeesController implements the CRUD actions for Employees model.
@@ -17,6 +19,7 @@ class EmployeesController extends Controller
     /**
      * @inheritdoc
      */
+		
     public function behaviors()
     {
         return [
@@ -66,6 +69,25 @@ class EmployeesController extends Controller
         $model = new Employees();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        	
+        	//save courses in cour_emp table
+
+        	foreach ($model->selectedCourses as $sc=>$value) {
+        		$courEmp=new courEmp();
+        		$courEmp->e_id=$model->id;
+        		$courEmp->c_id=$sc;
+        		$courEmp->save();
+        	}
+			
+        	//save employee info in users
+        	
+        	$user=new Users();
+        	$user->user_id=$model->id;
+        	$user->user_type="employee";
+        	$user->username=$model->user_name;
+        	$user->password=$model->user_name;
+        	$user->save();
+        	
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

@@ -16,11 +16,17 @@ use Yii;
  * @property CourEmp[] $courEmps
  * @property Courses[] $cs
  */
+
+
+
 class Employees extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
+	
+	public $selectedCourses;
+	
     public static function tableName()
     {
         return 'employees';
@@ -32,7 +38,7 @@ class Employees extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['full_name', 'user_name', 'email', 'phone'], 'required'],
+            [['full_name', 'user_name', 'email', 'phone','selectedCourses'], 'required'],
             [['full_name', 'user_name', 'email'], 'string', 'max' => 32],
             [['phone'], 'string', 'max' => 22],
         ];
@@ -49,6 +55,7 @@ class Employees extends \yii\db\ActiveRecord
             'user_name' => 'User Name',
             'email' => 'Email',
             'phone' => 'Phone',
+        	'selectedCourses'=>'Seleted Courses'
         ];
     }
 
