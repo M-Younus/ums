@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\employee\models\Employees */
+/* @var $model app\models\Users */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="employees-view">
+<div class="users-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,11 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-        	'user_id',
-            'full_name',
-            'user_name',
-            'email:email',
-            'phone',
+            'user_type',
+            'username',
+            'password',
+            'authkey',
         ],
     ]) ?>
 

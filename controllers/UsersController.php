@@ -1,28 +1,25 @@
 <?php
 
-namespace app\modules\employee\controllers;
+namespace app\controllers;
 
 use Yii;
-use app\modules\employee\models\Employees;
-use app\modules\employee\models\EmployeesSearch;
+use app\models\Users;
+use app\models\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\Users;
-use app\models\courEmp;
 
 /**
- * EmployeesController implements the CRUD actions for Employees model.
+ * UsersController implements the CRUD actions for Users model.
  */
-class EmployeesController extends Controller
+class UsersController extends Controller
 {
     /**
      * @inheritdoc
      */
-		
     public function behaviors()
     {
-    	Yii::$app->params['userName']=Users::findIdentity(Yii::$app->user->id);
+		Yii::$app->params ['userName'] = Users::findIdentity ( Yii::$app->user->id );
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -34,12 +31,12 @@ class EmployeesController extends Controller
     }
 
     /**
-     * Lists all Employees models.
+     * Lists all Users models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new EmployeesSearch();
+        $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -49,48 +46,38 @@ class EmployeesController extends Controller
     }
 
     /**
-     * Displays a single Employees model.
+     * Displays a single Users model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+    {	
+    	
+    	if($this->findModel($id)->user_type=='student'){
+    		$foundModel=$this->findModel($id)->student;
+    	return $this->redirect('?r=student/students/view&id='.$foundModel->id);	
+    	}
+    	
+    	else if($this->findModel($id)->user_type=='employee'){
+    		$foundModel=$this->findModel($id)->employee;
+    		return $this->redirect('?r=employee/employees/view&id='.$foundModel->id);
+    	}
+    	
+//         return $this->render('view', [
+//             'model' => $this->findModel($id),
+//         ]);
     }
 
     /**
-     * Creates a new Employees model.
+     * Creates a new Users model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Employees();
+        $model = new Users();
 
-        if ($model->load(Yii::$app->request->post())) {
-        	
-        	//save courses in cour_emp table
-
-        	foreach ($model->selectedCourses as $sc=>$value) {
-        		$courEmp=new courEmp();
-        		$courEmp->e_id=$model->id;
-        		$courEmp->c_id=$sc;
-        		$courEmp->save();
-        	}
-			
-        	//save employee info in users
-        	
-        	$user=new Users();
-        	$user->user_type="employee";
-        	$user->username=$model->user_name;
-        	$user->password=$model->user_name;
-        	$user->save();
-        	
-        	$model->user_id=$user->id;
-        	$model->save();
-        	
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -100,7 +87,7 @@ class EmployeesController extends Controller
     }
 
     /**
-     * Updates an existing Employees model.
+     * Updates an existing Users model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -119,7 +106,7 @@ class EmployeesController extends Controller
     }
 
     /**
-     * Deletes an existing Employees model.
+     * Deletes an existing Users model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -130,17 +117,18 @@ class EmployeesController extends Controller
 
         return $this->redirect(['index']);
     }
+    
 
     /**
-     * Finds the Employees model based on its primary key value.
+     * Finds the Users model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Employees the loaded model
+     * @return Users the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Employees::findOne($id)) !== null) {
+        if (($model = Users::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

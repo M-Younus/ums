@@ -18,7 +18,7 @@ class StudentsSearch extends Students
     public function rules()
     {
         return [
-            [['id', 'c_id'], 'integer'],
+            [['id','user_id', 'c_id'], 'integer'],
             [['full_name', 'user_name', 'email', 'phone'], 'safe'],
         ];
     }

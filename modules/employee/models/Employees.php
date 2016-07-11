@@ -3,11 +3,13 @@
 namespace app\modules\employee\models;
 
 use Yii;
+use app\models\Users;
 
 /**
  * This is the model class for table "employees".
  *
  * @property integer $id
+ * @property integer $user_id 
  * @property string $full_name
  * @property string $user_name
  * @property string $email
@@ -15,6 +17,7 @@ use Yii;
  *
  * @property CourEmp[] $courEmps
  * @property Courses[] $cs
+ * @property Users $user 
  */
 
 
@@ -38,9 +41,11 @@ class Employees extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+        	[['user_id'], 'integer'],
             [['full_name', 'user_name', 'email', 'phone','selectedCourses'], 'required'],
             [['full_name', 'user_name', 'email'], 'string', 'max' => 32],
             [['phone'], 'string', 'max' => 22],
+        	[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -51,6 +56,7 @@ class Employees extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+        	'user_id' => 'User ID',
             'full_name' => 'Full Name',
             'user_name' => 'User Name',
             'email' => 'Email',
@@ -74,4 +80,13 @@ class Employees extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Courses::className(), ['id' => 'c_id'])->viaTable('cour_emp', ['e_id' => 'id']);
     }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+    	return $this->hasOne(Users::className(), ['id' => 'user_id']);
+    }
+    
 }

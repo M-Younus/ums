@@ -53,7 +53,7 @@ $fieldOptions2 = [
 
         <?php ActiveForm::end(); ?>
 
-        <a href="#">I forgot my password</a><br>
+<!--         <a href="#">I forgot my password</a><br> -->
 
     </div>
     <!-- /.login-box-body -->

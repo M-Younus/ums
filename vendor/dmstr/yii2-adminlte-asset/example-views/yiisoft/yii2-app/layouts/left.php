@@ -20,7 +20,7 @@
                     ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
                     ['label' => 'Home', 'icon' => 'fa fa-dashboard', 'url' => ['/site/index']],
                 		
-                    ['label' => 'Student', 'icon' => 'fa fa-dashboard', 
+                    ['label' => 'Students', 'icon' => 'fa fa-dashboard', 
                     		'url' => '#',
                     		'items'=>[
                     				['label'=>'View','icon'=>'fa fa-dashboard','url'=>['/student/students/index']],
@@ -29,7 +29,7 @@
                     		
                     ],
                 		
-                    ['label' => 'Employee', 'icon' => 'fa fa-dashboard', 
+                    ['label' => 'Employees', 'icon' => 'fa fa-dashboard', 
                     		'url' => '#',
                     		'items'=>[
                     				['label'=>'View','icon'=>'fa fa-dashboard','url'=>['/employee/employees/index']],
@@ -38,7 +38,7 @@
                     		
                     ],
                 		
-                    ['label' => 'Course', 'icon' => 'fa fa-dashboard',
+                    ['label' => 'Courses', 'icon' => 'fa fa-dashboard',
                     		'url' => '#',
                     		'items'=>[
                     				['label'=>'View','icon'=>'fa fa-dashboard','url'=>['/course/courses/index']],

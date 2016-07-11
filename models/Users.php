@@ -3,16 +3,20 @@
 namespace app\models;
 
 use Yii;
+use app\modules\employee\models\Employees;
+use app\modules\student\models\Students;
 
 /**
  * This is the model class for table "users".
  *
  * @property integer $id
- * @property integer $user_id
  * @property string $user_type
  * @property string $username
  * @property string $password
  * @property string $authkey
+ *
+ * @property Employees $employee 
+ * @property Students $student
  */
 class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -30,8 +34,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['user_id', 'user_type'], 'required'],
-            [['user_id'], 'integer'],
+            [['user_type'], 'required'],
             [['user_type'], 'string', 'max' => 32],
             [['username', 'password'], 'string', 'max' => 22],
             [['authkey'], 'string', 'max' => 35],
@@ -45,7 +48,6 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
             'user_type' => 'User Type',
             'username' => 'Username',
             'password' => 'Password',
@@ -84,6 +86,22 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function generateAuthKey()
     {
         $this->auth_key = Security::generateRandomKey();
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmployee()
+    {
+    	return $this->hasOne(Employees::className(), ['user_id' => 'id']);
+    }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStudent()
+    {
+    	return $this->hasOne(Students::className(), ['user_id' => 'id']);
     }
     
 }

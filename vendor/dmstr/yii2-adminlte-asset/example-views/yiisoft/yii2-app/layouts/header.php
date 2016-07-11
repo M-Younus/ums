@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -161,11 +162,27 @@ use yii\helpers\Html;
                                 <small><?= $userName->user_type ?></small>
                             </p>
                         </li>
-
+                        
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <?php
+//                                 if($userType=='student'){
+//                                 	echo Html::a('Profile',
+//                                 			Url::to('?r=student/students/view&id='.$userName->id),
+//                                 			['class'=>'btn btn-default btn-flat']);
+//                                 }
+//                                 else if($userType=='employee'){
+//                                 	echo Html::a('Profile',
+//                                 			Url::to('?r=employee/employees/view&id='.$userName->id),
+//                                 			['class'=>'btn btn-default btn-flat']);
+//                                 } 
+									
+                                	echo Html::a('Profile',
+                                			Url::to('?r=users/view&id='.$userName->id),
+                                			['class'=>'btn btn-default btn-flat']);
+                                
+                                ?>
                             </div>
                             <div class="pull-right">
                                 <?= Html::a(

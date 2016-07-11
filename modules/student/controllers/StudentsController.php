@@ -67,16 +67,18 @@ class StudentsController extends Controller
     {
         $model = new Students();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
         	
         	//save student info in users table
         	
         	$user=new Users();
-        	$user->user_id=$model->id;
         	$user->user_type="student";
         	$user->username=$model->user_name;
         	$user->password=$model->user_name;
         	$user->save();
+        	
+        	$model->user_id=$user->id;
+        	$model->save();
         	
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

@@ -26,6 +26,7 @@ if (Yii::$app->controller->action->id === 'login') {
 
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
     $userName=Yii::$app->params['userName'];
+    $userType=Yii::$app->params['userName']->user_type;
     ?>
     <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -45,18 +46,18 @@ if (Yii::$app->controller->action->id === 'login') {
         
         $this->render(
             'header.php',
-            ['directoryAsset' => $directoryAsset,'userName'=>$userName]
+            ['directoryAsset' => $directoryAsset,'userName'=>$userName,'userType'=>$userType]
         ) ?>
 
         <?= $this->render(
             'left.php',
-            ['directoryAsset' => $directoryAsset,'userName'=>$userName]
+            ['directoryAsset' => $directoryAsset,'userName'=>$userName,'userType'=>$userType]
         )
         ?>
 
         <?= $this->render(
             'content.php',
-            ['content' => $content, 'directoryAsset' => $directoryAsset,'userName'=>$userName]
+            ['content' => $content, 'directoryAsset' => $directoryAsset,'userName'=>$userName,'userType'=>$userType]
         ) ?>
 
     </div>

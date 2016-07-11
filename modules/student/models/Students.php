@@ -4,11 +4,13 @@ namespace app\modules\student\models;
 
 use Yii;
 use app\modules\course\models\Courses;
+use app\models\Users;
 
 /**
  * This is the model class for table "students".
  *
  * @property integer $id
+ * @property integer $user_id 
  * @property string $full_name
  * @property string $user_name
  * @property string $email
@@ -16,6 +18,7 @@ use app\modules\course\models\Courses;
  * @property integer $c_id
  *
  * @property Courses $c
+ * @property Users $user 
  */
 class Students extends \yii\db\ActiveRecord
 {
@@ -33,11 +36,13 @@ class Students extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+        	[['user_id', 'c_id'], 'integer'],
             [['full_name', 'user_name', 'email', 'phone', 'c_id'], 'required'],
             [['c_id'], 'integer'],
             [['full_name', 'user_name', 'email'], 'string', 'max' => 32],
             [['phone'], 'string', 'max' => 22],
             [['c_id'], 'exist', 'skipOnError' => true, 'targetClass' => Courses::className(), 'targetAttribute' => ['c_id' => 'id']],
+        	[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -48,6 +53,7 @@ class Students extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+//         	   'user_id' => 'User ID',
 //             'full_name' => 'Full Name',
 //             'user_name' => 'User Name',
             'email' => 'Full Name',
@@ -63,4 +69,13 @@ class Students extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Courses::className(), ['id' => 'c_id']);
     }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+    	return $this->hasOne(Users::className(), ['id' => 'user_id']);
+    }
+    
 }

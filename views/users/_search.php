@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\employee\models\EmployeesSearch */
+/* @var $model app\models\UsersSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="employees-search">
+<div class="users-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -16,16 +16,14 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'id') ?>
-    
-    <?= $form->field($model, 'user_id') ?> 
 
-    <?= $form->field($model, 'full_name') ?>
+    <?= $form->field($model, 'user_type') ?>
 
-    <?= $form->field($model, 'user_name') ?>
+    <?= $form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'email') ?>
+    <?= $form->field($model, 'password') ?>
 
-    <?= $form->field($model, 'phone') ?>
+    <?= $form->field($model, 'authkey') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
