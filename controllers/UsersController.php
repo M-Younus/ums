@@ -50,22 +50,37 @@ class UsersController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {	
+//     public function actionView($id)
+//     {	
     	
-    	if($this->findModel($id)->user_type=='student'){
-    		$foundModel=$this->findModel($id)->student;
-    	return $this->redirect('?r=student/students/view&id='.$foundModel->id);	
-    	}
+//     	if($this->findModel($id)->user_type=='student'){
+//     		$foundModel=$this->findModel($id)->student;
+//     	return $this->redirect('?r=student/students/view&id='.$foundModel->id);	
+//     	}
     	
-    	else if($this->findModel($id)->user_type=='employee'){
-    		$foundModel=$this->findModel($id)->employee;
-    		return $this->redirect('?r=employee/employees/view&id='.$foundModel->id);
-    	}
+//     	else if($this->findModel($id)->user_type=='employee'){
+//     		$foundModel=$this->findModel($id)->employee;
+//     		return $this->redirect('?r=employee/employees/view&id='.$foundModel->id);
+//     	}
     	
-//         return $this->render('view', [
-//             'model' => $this->findModel($id),
-//         ]);
+// //         return $this->render('view', [
+// //             'model' => $this->findModel($id),
+// //         ]);
+//     }
+    
+	public function actionStuDashboard($id){
+
+		$this->layout='student/stu_layout';
+    	return $this->render('stu-dashboard',[
+    			'model'=>$this->findModel($id)->student
+    	]);	
+    }
+    
+    public function actionEmpDashboard($id){
+    	$this->layout='employee/emp_layout';
+    	return $this->render('emp-dashboard',[
+    			'model'=>$this->findModel($id)->employee
+    	]);
     }
 
     /**

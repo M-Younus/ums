@@ -75,15 +75,6 @@ return array (
       '@cebe/gravatar' => $vendorDir . '/cebe/yii2-gravatar/cebe/gravatar',
     ),
   ),
-  'dmstr/yii2-adminlte-asset' => 
-  array (
-    'name' => 'dmstr/yii2-adminlte-asset',
-    'version' => '2.3.1.0',
-    'alias' => 
-    array (
-      '@dmstr' => $vendorDir . '/dmstr/yii2-adminlte-asset',
-    ),
-  ),
   '2amigos/yii2-multi-select-widget' => 
   array (
     'name' => '2amigos/yii2-multi-select-widget',
@@ -91,6 +82,15 @@ return array (
     'alias' => 
     array (
       '@dosamigos/multiselect' => $vendorDir . '/2amigos/yii2-multi-select-widget',
+    ),
+  ),
+  'dmstr/yii2-adminlte-asset' => 
+  array (
+    'name' => 'dmstr/yii2-adminlte-asset',
+    'version' => '2.3.2.0',
+    'alias' => 
+    array (
+      '@dmstr' => $vendorDir . '/dmstr/yii2-adminlte-asset',
     ),
   ),
 );

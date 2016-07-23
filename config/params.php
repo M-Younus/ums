@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'younus.ubit56@gmail.com',
 	'userName'=>NULL
 ];

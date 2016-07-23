@@ -37,6 +37,10 @@ $config = [
             'enableAutoLogin' => true,
             'enableSession'=>true,
         ],
+//     	'authManager'=>[
+//     		'class'=>'yii\rbac\DbManager',
+//     		'defaultRoles'=>['guest'],
+//     	],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -45,7 +49,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
